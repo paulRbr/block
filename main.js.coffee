@@ -3,7 +3,18 @@
 window.block = {}
 b = window.block
 
-b.start = () ->
-  m = new b.MyMap()
-  m.init({size: 10, el: "#container"})
-  m.render()
+# Number of players
+b.players = 2
+
+# Turn number
+b.turn = 0
+
+# Is it to the next player to play?
+b.changeTurn = (sure) ->	
+	b.turn++ if sure
+		
+
+b.start = (options) ->
+	m = new b.MyMap()
+	m.init({size: options.size, el: options.el})
+	m.render()
