@@ -1,3 +1,6 @@
+# Waiting for requirejs expose jquery
+window.$ = jQuery
+
 # Main namespace
 # Make it publicly available
 window.block = {}

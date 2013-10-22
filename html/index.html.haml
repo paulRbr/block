@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %title Block - a mini-game
+    %script(type="text/javascript" src="lib/jquery.js")
+    %script(type="text/javascript" src="main.js")
+    %script(type="text/javascript" src="map.js")
+    %script(type="text/javascript" src="state.js")
+  %body
+    #container
+    :coffeescript
+      block.start {size: 3, el: "#container"}
