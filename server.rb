@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 require 'bundler/setup'
 require 'sprockets-vendor_gems/extend_all'
 require 'uglifier'
@@ -9,8 +11,9 @@ end
 
 assets.register_engine '.haml', Tilt::HamlTemplate
 
-assets.append_path('js')
+assets.append_path('scripts')
 assets.append_path('html')
+assets.append_path('styles')
 assets.append_path('vendor/assets/javascripts')
 
 get '/*' do

@@ -1,0 +1,53 @@
+$bar_length: 5em;
+$bar_width: 0.5em;
+#map {
+  .row {
+    display: table;
+    margin:  auto;
+    .space {
+      float: left;
+      width: $bar_length/2;
+      height: $bar_length/2;
+      margin: 0 $bar_length/4;
+      background-color: lightgray;
+    }
+    &.odd {
+      background-color: midnightblue;
+    }
+    &.even {
+      background-color: darkred;
+    }
+    .state1 {
+      background-color: cornflowerblue;
+    }
+    .state2 {
+      background-color: indianred;
+    }
+  }
+  .even {
+    .state1 {
+      width: $bar_width;
+      margin: -$bar_length/4 ($bar_length - $bar_width)/2;
+      height: $bar_length;
+    }
+    .state2 {
+      height: $bar_width;
+      margin: $bar_length/4-$bar_width/2 0;
+      width: $bar_length;
+    }
+  }
+  .odd {
+    .state1 {
+      height: $bar_width;
+      margin: $bar_length/4-$bar_width/2 0;
+      width: $bar_length;
+    }
+    .state2 {
+      width: $bar_width;
+      margin: -$bar_length/4 ($bar_length - $bar_width)/2;
+      height: $bar_length;
+    }
+  }
+  margin: $bar_length/2 auto;
+  width: 960px;
+}

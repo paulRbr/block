@@ -29,15 +29,18 @@ class block.MyMap
     for row in @me
       row_num++
       r = $ '<div/>'
+      r.addClass 'row'
       if row_num%2
         r.addClass 'odd'
       else
         r.addClass 'even'
       for space in row
         s = $ '<div/>'
+        s.addClass 'space'
         s.click (e)->
           block.changeTurn($(e.target).data("space").set(block.turn%block.players+1))
         s.data("space", space)
+        space.setEl(s)
         r.append s
       @map.append r
 			

@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem 'sprockets', :git => 'https://github.com/sstephenson/sprockets.git'
+gem 'sprockets', :git => 'https://github.com/sstephenson/sprockets.git', :tag => 'v2.10.0'
 gem 'sprockets-vendor_gems'
 gem 'coffee-script'
 gem 'sass'
