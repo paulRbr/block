@@ -15,7 +15,9 @@ class block.MyMap
       else
         lim = @size-1
       while lim>0
-        a.push(new block.State())
+        s = new block.State()
+        s.init()
+        a.push(s)
         lim--
       @me.push(a)
       @build(n-1) if n > 1
@@ -33,9 +35,9 @@ class block.MyMap
         r.addClass 'even'
       for space in row
         s = $ '<div/>'
-        s.click ()->
-          b.changeTurn(@data().set(b.turn%b.players+1))
-        s.data(space)
+        s.click (e)->
+          block.changeTurn($(e.target).data("space").set(block.turn%block.players+1))
+        s.data("space", space)
         r.append s
       @map.append r
 			
