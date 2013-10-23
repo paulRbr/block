@@ -4,9 +4,5 @@
 # up again.  This script gets executed directly, so it could be python, php,
 # ruby, etc.
 
-source $OPENSHIFT_CARTRIDGE_SDK_BASH
-
-pushd ${OPENSHIFT_REPO_DIR} > /dev/null
 bundle check
 server.rb
-popd > /dev/null
