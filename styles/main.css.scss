@@ -1,5 +1,18 @@
 $bar_length: 5em;
-$bar_width: 0.5em;
+$bar_width: 0.2em;
+#info {
+  font-size: 1.5em;
+  font-family: "Helvetica";
+  text-align: center;
+  #turn {
+    &.p1 {
+      color: cornflowerblue;
+    }
+    &.p2 {
+      color: indianred;
+    }
+  }
+}
 #map {
   .row {
     display: table;
@@ -9,19 +22,23 @@ $bar_width: 0.5em;
       width: $bar_length/2;
       height: $bar_length/2;
       margin: 0 $bar_length/4;
-      background-color: lightgray;
-    }
-    &.odd {
-      background-color: midnightblue;
-    }
-    &.even {
-      background-color: darkred;
+      border: 1px solid gray;
     }
     .state1 {
       background-color: cornflowerblue;
     }
     .state2 {
       background-color: indianred;
+    }
+    &:first-child {
+      .space {
+        border-top: 2px solid indianred;
+      }
+    }
+    &:last-child {
+      .space {
+        border-bottom: 2px solid indianred;
+      }
     }
   }
   .even {
@@ -37,6 +54,14 @@ $bar_width: 0.5em;
     }
   }
   .odd {
+    .space {
+      &:first-child {
+        border-left: 2px solid cornflowerblue;
+      }
+      &:last-child {
+        border-right: 2px solid cornflowerblue;
+      }
+    }
     .state1 {
       height: $bar_width;
       margin: $bar_length/4-$bar_width/2 0;

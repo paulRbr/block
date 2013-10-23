@@ -19,11 +19,13 @@ b.changeTurn = (sure) ->
 b.incrTurn = () ->
   b.turn++
   next = b.turn%b.players+1
-  b.info.text("Player #{next}")
-  b.info.removeClass().addClass "player#{next}"
+  b.info.find("#turn").text("Player #{next}")
+  b.info.find("#turn").removeClass().addClass "p#{next}"
 
 b.render = () ->
-  b.info = $ '<div>'
+  b.info = $ '<div id="info">'
+  b.info.text("'s turn")
+  b.info.prepend $('<span id="turn">')
   b.el.prepend b.info
   b.incrTurn()
 
