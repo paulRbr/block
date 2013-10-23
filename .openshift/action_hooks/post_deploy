@@ -4,5 +4,5 @@
 # up again.  This script gets executed directly, so it could be python, php,
 # ruby, etc.
 
-bundle check
-server.rb
+cd $OPENSHIFT_REPO_DIR
+./server.rb
