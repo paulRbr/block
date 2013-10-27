@@ -1,24 +1,28 @@
-## Block
+Block
 =====
 
-A mini-game inspired by the old Fences game
+A mini-game inspired by the old Fences game.
+_Built with [webapp](https://github.com/popox/webapp) with ease._
 
-## How to try the app
+## How it was done
 
-Ensure to have ruby installed on your machine.
+TODO: mini-tutorial using the webapp fork
 
-```
-bundle install
-```
+## Play
 
-Then run the ```server``` script to launch a Sinatra mini web-server.
+Want to play the game?
+Just [following the link](http://block-webgame.rhcloud.com/), hosted by [OpenShift](http://www.openshift.com/)
 
-```
-server
-```
+## Contributing
 
-Browse the freshly served application!
+Thinking about helping this app to grow?
 
-```
-$BROWSER http://localhost:4567/application.html
-```
+Here's what you can do:
+
+ * Write an idea to integrate in the app [here](https://github.com/popox/block/issues)
+ * Code a new feature. Fork, Branch, Pull request..
+ * Promote the app to your friends. Talk about it, share it and use it!
+ * Eat an Oreo. Because that's always a good thing to do
+ * [Buy me a beer](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QHK6TMG66TSD4). If ever you like the project
+ * Help someone in need. I'm sure you'll find someone to help
+

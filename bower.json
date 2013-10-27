@@ -1,0 +1,11 @@
+{
+  "name": "block-webapp",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "jquery": "~1.10.0",
+    "marionette": "~1.2.0",
+    "requirejs": "~2.1.8",
+    "handlebars": "~1.0.0"
+  }
+}

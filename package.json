@@ -1,0 +1,43 @@
+{
+  "name": "block-webapp",
+  "version": "0.1.2",
+  "description": "Block - a simple webgame application built with webapp project",
+  "keywords": [
+    "webapp",
+    "game",
+    "webgame",
+    "fences",
+    "block"
+  ],
+  "homepage": "https://github.com/popox/block",
+  "bugs": "https://github.com/popox/block/issues",
+  "license": "MIT",
+  "author": {
+    "name": "Paul B.",
+    "email": "paul@bonaud.fr"
+  },
+  "main": "Gruntfile.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/popox/block.git"
+  },
+  "dependencies": {
+    "requirejs": "~2.1.5"
+  },
+  "devDependencies": {
+    "matchdep": "~0.1.1",
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "bower": "~1.2.7",
+    "durable-json-lint": "0.0.1",
+    "grunt-bower-requirejs": "git://github.com/popox/grunt-bower-requirejs.git#v0.7.2"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.0",
+    "bower": "~1.x"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}

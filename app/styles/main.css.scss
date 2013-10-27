@@ -1,0 +1,95 @@
+$bar_length: 5em;
+$bar_width: 0.2em;
+#container {
+  margin: $bar_length/2 auto;
+  width: 960px;
+  #info {
+    font-size: 1.5em;
+    font-family: "Helvetica";
+    text-align: center;
+    #turn {
+      &.p1 {
+        color: cornflowerblue;
+      }
+      &.p2 {
+        color: indianred;
+      }
+    }
+  }
+  #map {
+    .row {
+      display: table;
+      margin:  auto;
+      position: relative;
+      &:first-child {
+        &:after,
+        .space:before {
+          content: "★";
+        }
+      }
+      &:last-child {
+        &:after,
+        .space:before {
+          content: "★";
+        }
+      }
+      &:after {
+        content: "•";
+        position: absolute;
+        margin-top: $bar_length/8;
+      }
+      .space {
+        float: left;
+        width: $bar_length/2;
+        height: $bar_length/2;
+        margin: 0 $bar_length/4;
+      }
+      .space:before {
+        content: "•";
+        position: absolute;
+        margin-left: -$bar_length/3;
+        margin-top: $bar_length/8;
+      }
+      .state1 .inner {
+        background-color: cornflowerblue;
+      }
+      .state2 .inner{
+        background-color: indianred;
+      }
+    }
+    $marg1: $bar_length/4-$bar_width/2;
+    $marg2: $bar_length/4;
+    .even {
+      color: indianred;
+      .state1 .inner {
+        width: $bar_width;
+        margin: -$marg2 $marg2;
+        height: $bar_length;
+      }
+      .state2 .inner {
+        height: $bar_width;
+        margin: $marg1  -1*$marg1;
+        width: $bar_length;
+      }
+    }
+    .odd {
+      color: cornflowerblue;
+      .space:first-child:before {
+        content: "★";
+      }
+      &:after {
+        content: "★";
+      }
+      .state1 .inner {
+        height: $bar_width;
+        margin: $marg1 -1*$marg1;
+        width: $bar_length;
+      }
+      .state2 .inner {
+        width: $bar_width;
+        margin: -$marg2 $marg2;
+        height: $bar_length;
+      }
+    }
+  }
+}
