@@ -11,7 +11,7 @@ TODO: mini-tutorial using the webapp fork
 ## Play
 
 Want to play the game?
-Just [following the link](http://block-webgame.rhcloud.com/), hosted by [OpenShift](http://www.openshift.com/)
+Just [following the link](http://block-webgame.rhcloud.com/index.html), hosted by [OpenShift](http://www.openshift.com/)
 
 ## Contributing
 
