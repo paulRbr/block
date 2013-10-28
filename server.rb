@@ -13,8 +13,11 @@ assets.append_path('.')
 assets.append_path('app')
 assets.append_path('app/layouts')
 
+get '/' do
+  redirect to '/index.html'
+end
+
 get '/*' do
   new_env = env.clone
   assets.call(new_env)
 end
-
