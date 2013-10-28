@@ -1,5 +1,3 @@
-#!/usr/bin/ruby
-
 require 'bundler/setup'
 require 'sprockets-vendor_gems/extend_all'
 require 'uglifier'
