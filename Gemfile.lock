@@ -15,7 +15,7 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.3.3)
+    coffee-script-source (1.6.3)
     execjs (2.0.2)
     haml (4.0.3)
       tilt
@@ -24,12 +24,11 @@ GEM
       sprockets (>= 2.0.3)
       tilt (>= 1.3.3)
     hike (1.2.3)
+    json (1.8.1)
     multi_json (1.8.2)
     rack (1.5.2)
     rack-protection (1.5.1)
       rack
-    rack-test (0.6.2)
-      rack (>= 1.0)
     sass (3.2.12)
     sinatra (1.4.4)
       rack (~> 1.4)
@@ -38,9 +37,9 @@ GEM
     sprockets-vendor_gems (0.1.3)
       sprockets
     tilt (1.4.1)
-    uglifier (2.2.1)
+    uglifier (2.3.0)
       execjs (>= 0.3.0)
-      multi_json (~> 1.0, >= 1.0.2)
+      json (>= 1.8.0)
 
 PLATFORMS
   ruby
@@ -50,7 +49,7 @@ DEPENDENCIES
   execjs
   haml
   haml_coffee_assets
-  rack-test
+  rack
   sass
   sinatra
   sprockets!

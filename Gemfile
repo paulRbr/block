@@ -4,7 +4,7 @@ gem 'sprockets', :git => 'https://github.com/sstephenson/sprockets.git', :tag =>
 gem 'sprockets-vendor_gems'
 gem 'coffee-script'
 gem 'sass'
-gem 'rack-test'
+gem 'rack'
 gem 'sinatra'
 gem 'haml'
 gem 'haml_coffee_assets'
