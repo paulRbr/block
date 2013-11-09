@@ -1,4 +1,4 @@
-define ['jquery', 'map'], ($, MyMap) ->
+define ['map', 'jquery', 'underscore', 'backbone', 'marionette'], (MyMap, $) ->
   class MainController extends Marionette.Controller
 
     initialize: (options) ->
@@ -11,9 +11,9 @@ define ['jquery', 'map'], ($, MyMap) ->
     turn: -1
 
     newGame: (options) ->
-      m = new MyMap()
-      m.init {size: options.size, el: options.el, app: @}
-      m.render()
+      @m = new MyMap()
+      @m.init {size: options.size, el: options.el, app: @}
+      @m.render()
       @el = $(options.el) if options && options.el
       @render()
 
@@ -24,8 +24,16 @@ define ['jquery', 'map'], ($, MyMap) ->
     incrTurn: () ->
       @turn++;
       next = @turn%@players+1
-      @info.find("#turn").text("Player #{next}")
-      @info.find("#turn").removeClass().addClass "p#{next}"
+      if @hasWinner()
+        @info.text("Player #{(@turn-1)%@players+1} won!")
+        @info.removeClass().addClass "p#{(@turn-1)%@players+1}"
+        @el.find(".space").off('click')
+      else
+        @info.find("#turn").text("Player #{next}")
+        @info.find("#turn").removeClass().addClass "p#{next}"
+
+    hasWinner: () ->
+      @m.hasWinner()
 
     render: () ->
       @info = $ '<div id="info">'

@@ -1,4 +1,4 @@
-define ['jquery', 'controllers/main_controller'], ($, MainController) ->
+define ['controllers/main_controller', 'jquery', 'underscore', 'backbone', 'marionette'], (MainController, $) ->
   # Create the single page application
   App = new Backbone.Marionette.Application();
 
