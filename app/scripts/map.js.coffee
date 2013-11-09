@@ -1,4 +1,4 @@
-define ['jquery', 'state'], ($, State) ->
+define ['jquery', 'state', 'winner'], ($, State, Winner) ->
   class MyMap
     # The Map constructor returns the map
     init: (options) ->
@@ -7,7 +7,11 @@ define ['jquery', 'state'], ($, State) ->
       @el = $(options.el) if options.el
       @app = options.app if options.app
       @map = $("<div id='map'></div>").appendTo @el
+      @winner = new Winner {game: @me}
       @build(2*@size+1) if @size
+
+    hasWinner: () ->
+      @winner.exists()
 
     build: (n) ->
       if n > 0

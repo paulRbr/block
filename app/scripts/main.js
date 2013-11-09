@@ -13,6 +13,6 @@ require.config({
   }
 });
 
-require(['app', 'jquery', 'underscore', 'backbone', 'marionette'], function(App) {
+require(['app'], function(App) {
   App.start({size: 5, el: '#container'})
 });

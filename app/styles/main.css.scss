@@ -7,14 +7,12 @@ $bar_width: 0.2em;
     font-size: 1.5em;
     font-family: "Helvetica";
     text-align: center;
-    #turn {
-      &.p1 {
-        color: cornflowerblue;
-      }
-      &.p2 {
-        color: indianred;
-      }
-    }
+  }
+  .p1 {
+    color: cornflowerblue;
+  }
+  .p2 {
+    color: indianred;
   }
   #map {
     .row {
