@@ -2,3 +2,4 @@
 .ig*
 *~
 node_modules/
+bower_components/
