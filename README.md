@@ -2,11 +2,11 @@ Block
 =====
 
 A mini-game inspired by the old Fences game.
-_Built with [webapp](https://github.com/popox/webapp) with ease._
+_Built with [generator-webapp-rjs](https://github.com/popox/generator-webapp-rjs) with ease._
 
 ## How it was done
 
-TODO: mini-tutorial using the webapp fork
+TODO:
 
 ## Play
 
