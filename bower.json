@@ -1,7 +1,6 @@
 {
   "name": "block-webapp",
-  "version": "0.8.0",
-  "private": true,
+  "version": "0.8.1",
   "dependencies": {
     "jquery": "~1.10.0",
     "marionette": "~1.2.0",
