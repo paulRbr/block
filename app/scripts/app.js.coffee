@@ -1,8 +1,16 @@
-define ['controllers/main_controller', 'jquery', 'underscore', 'backbone', 'marionette'], (MainController, $) ->
+define ['controllers/main_controller', 'jquery', 'websocket_rails', 'underscore', 'backbone', 'marionette'], (MainController, $) ->
   # Create the single page application
   App = new Backbone.Marionette.Application();
 
-  # Prevent default clicks on links for a pushState ready app
+  App.addInitializer ->
+    # connect to server like normal
+    dispatcher = new WebSocketRails('localhost:3000/websocket')
+    # subscribe to the channel
+    channel = dispatcher.subscribe('my_game');
+    channel.bind 'server_msg', (data) ->
+      console.log data
+
+# Prevent default clicks on links for a pushState ready app
   App.addInitializer () ->
     $(document).on 'click', 'a:not([data-bypass])', (evt) ->
       href = $(@).attr('href')
