@@ -5,12 +5,11 @@ define ['controllers/main_controller', 'jquery', 'websocket_rails', 'underscore'
   App.addInitializer ->
     # Get websocket connection info
     connection_params = {}
-    $.get('websocket/', (data) ->
-      connection_params = JSON.parse(data)
+    $.get('ws/', (connection_params) ->
       # connect to server like normal
-      dispatcher = new WebSocketRails("#{connection_params.host}:#{connection_params.port}/websocket")
+      dispatcher = new WebSocketRails "#{connection_params.host}:#{connection_params.port}/websocket"
       # subscribe to the channel
-      channel = dispatcher.subscribe('my_game');
+      channel = dispatcher.subscribe 'my_game'
       channel.bind 'server_msg', (data) ->
         console.log data
     ).fail ->
