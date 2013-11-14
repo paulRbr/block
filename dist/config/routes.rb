@@ -2,8 +2,11 @@ RailsApp::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  #
+  # Game handshake
   match 'send/' => 'game#send_msg'
+
+  # WebSocket connection parameters
+  match 'websocket/' => 'websocket#connection_params'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
