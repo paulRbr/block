@@ -304,12 +304,12 @@ module.exports = function (grunt) {
                     ]
                 }]
             },
-            pub: {
+            deploy: {
                 files: [{
                     expand: true,
                     dot: true,
                     cwd: '<%= yeoman.dist %>',
-                    dest: 'public/',
+                    dest: 'dist/public/',
                     src: [ '**/*' ]
                 }]
             },
@@ -388,11 +388,15 @@ module.exports = function (grunt) {
         'usemin'
     ]);
 
+    grunt.registerTask('deploy', [
+        'build',
+        'copy:deploy'
+    ]);
+
     grunt.registerTask('default', [
         'jshint',
         'bower',
         'test',
-        'build',
-        'copy:pub'
+        'build'
     ]);
 };

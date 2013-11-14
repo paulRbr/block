@@ -3,12 +3,18 @@ define ['controllers/main_controller', 'jquery', 'websocket_rails', 'underscore'
   App = new Backbone.Marionette.Application();
 
   App.addInitializer ->
-    # connect to server like normal
-    dispatcher = new WebSocketRails('localhost:3000/websocket')
-    # subscribe to the channel
-    channel = dispatcher.subscribe('my_game');
-    channel.bind 'server_msg', (data) ->
-      console.log data
+    # Get websocket connection info
+    connection_params = {}
+    $.get('websocket/', (data) ->
+      connection_params = JSON.parse(data)
+      # connect to server like normal
+      dispatcher = new WebSocketRails("#{connection_params.host}:#{connection_params.port}/websocket")
+      # subscribe to the channel
+      channel = dispatcher.subscribe('my_game');
+      channel.bind 'server_msg', (data) ->
+        console.log data
+    ).fail ->
+      console.error 'No websocket server available'
 
 # Prevent default clicks on links for a pushState ready app
   App.addInitializer () ->
