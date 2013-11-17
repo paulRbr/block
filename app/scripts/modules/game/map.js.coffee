@@ -1,11 +1,11 @@
-define ['jquery', 'state', 'winner'], ($, State, Winner) ->
+define ['jquery', 'modules/game/state', 'modules/game/winner'], ($, State, Winner) ->
   class MyMap
     # The Map constructor returns the map
     init: (options) ->
       @me = []
       @size = options.size if options.size
       @el = $(options.el) if options.el
-      @app = options.app if options.app
+      @game = options.game if options.game
       @map = $("<div id='map'></div>").appendTo @el
       @winner = new Winner {game: @me}
       @build(2*@size+1) if @size
@@ -21,9 +21,7 @@ define ['jquery', 'state', 'winner'], ($, State, Winner) ->
         else
           lim = @size-1
         while lim>0
-          s = new State()
-          s.init()
-          a.push(s)
+          a.push(new State())
           lim--
         @me.push(a)
         @build(n-1) if n > 1
@@ -46,12 +44,12 @@ define ['jquery', 'state', 'winner'], ($, State, Winner) ->
           s.addClass 'space'
           # Interaction
           if row_num>0 and row_num<@me.length-1
-            s.click (e) =>
-              if $(e.target).data("space")
-                tried = $(e.target).data("space").set(@app.turn%@app.players+1)
-                @app.changeTurn tried
-            s.data("space", space)
-          space.setEl(s)
+            s.click (here) =>
+              @game.clicked(here)
+            space.on 'change:state', (new_state)->
+              new_state.get('el').addClass "state#{new_state.get('state')}"
+            s.data "space", space
+            space.set 'el', s
           s.append i
           r.append s
         @map.append r

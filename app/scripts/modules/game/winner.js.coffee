@@ -2,7 +2,6 @@ define [], () ->
   class Winner
     constructor: (options) ->
       @current = options.game if options && options.game
-      window.Global = this
 
     getMap: (player) ->
       if player == 2
@@ -47,7 +46,7 @@ define [], () ->
     format: (player) ->
       (row) ->
         row.map (l) ->
-          if (l.state==player)
+          if (l.get('state')==player)
             player
           else
             0

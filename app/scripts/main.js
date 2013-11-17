@@ -6,11 +6,12 @@ require.config({
         marionette: '../bower_components/marionette/lib/backbone.marionette',
         underscore: '../bower_components/underscore/underscore',
         handlebars: '../bower_components/handlebars/handlebars',
-        'handlebars.runtime': '../bower_components/handlebars/handlebars.runtime'
+        'handlebars.runtime': '../bower_components/handlebars/handlebars.runtime',
+        'cryptojs.sha1': '../bower_components/crypto-js/build/rollups/sha1'
     }
 });
 
 require(['app'], function(App) {
     'use strict';
-    App.start({size: 5, el: '#container'});
+    App.start({});
 });
