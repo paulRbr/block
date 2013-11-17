@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# this will spawn a sub-shell, so make sure we can use rvm
+source $OPENSHIFT_DATA_DIR/.rvm/scripts/rvm
+
+# make sure we're in the app-dir so we use the right gemset
+cd $OPENSHIFT_REPO_DIR
+
+# Set OpenShift IP and PORT
+if [[ -z "$OPENSHIFT_INTERNAL_IP" ]]; then export OPENSHIFT_INTERNAL_IP="$OPENSHIFT_DIY_IP"; fi
+if [[ -z "$OPENSHIFT_INTERNAL_PORT" ]]; then export OPENSHIFT_INTERNAL_PORT="$OPENSHIFT_DIY_PORT"; fi
+if [[ -z "$OPENSHIFT_LOG_DIR" ]]; then export OPENSHIFT_LOG_DIR="$OPENSHIFT_DIY_LOG_DIR"; fi
+
+# start the thin server on the internal ip and port
+bundle exec thin start -d -a $OPENSHIFT_INTERNAL_IP -p $OPENSHIFT_INTERNAL_PORT -e production

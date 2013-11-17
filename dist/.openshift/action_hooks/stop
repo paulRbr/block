@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# kill the server through the pidfile
+kill `cat -- $OPENSHIFT_REPO_DIR/tmp/pids/thin.pid`
+exit 0

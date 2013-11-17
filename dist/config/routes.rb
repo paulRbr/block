@@ -6,7 +6,9 @@ RailsApp::Application.routes.draw do
   match 'send/' => 'game#send_msg'
 
   # WebSocket connection parameters
-  match 'ws/' => 'websocket#connection_params'
+  match 'ws/' => 'info#connection_params'
+
+  match '/websocket', :to => WebsocketRails::ConnectionManager.new
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
