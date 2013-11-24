@@ -11,20 +11,56 @@
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/bootstrap.css">
+        <link rel="stylesheet" href="styles/style.css">
         <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/game.css">
         <!-- endbuild -->
     </head>
     <body>
         <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-
-        <div class="hero-unit">
-          <h1>Time to Block!</h1>
-          <div id="game"></div>
+        <div class="container container-wide">
+            <!-- content -->
+            <div class="content" role="main">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="widget-container boxed">
+                          <h1 class="widget-title">Time to Block!</h1>
+                          <div class="inner comment-text">
+                              <div id="welcome"></div>
+                              <div id="game"></div>
+                          </div>
+                          <ul class="stats-links clearfix">
+                              <li class="first">
+                                  <a class="social-github" href="https://github.com/popox/block" data-bypass target="_blank" hidefocus="true" style="outline: medium none;"><span>GitHub</span></a>
+                              </li>
+                              <li>
+                                  <a class="social-google" href="#" hidefocus="true" style="outline: medium none;"><span>Google</span></a>
+                              </li>
+                              <li class="last">
+                                  <a class="social-twitter" href="https://twitter.com/geniuswebdev" data-bypass target="_blank" hidefocus="true" style="outline: medium none;"><span>Twitter</span></a>
+                              </li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
+        <!-- ModalDialog thanks to : http://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/ -->
+        <div id="openModal" class="modalDialog">
+            <div class="container">
+                <div class="widget-container styled boxed line-left">
+                    <div class="inner clearfix">
+                        <div id="modalContainer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- build:js scripts/main.js -->
         <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>

@@ -1,7 +1,7 @@
 define ['jquery', 'modules/game/state', 'modules/game/winner'], ($, State, Winner) ->
   class MyMap
     # The Map constructor returns the map
-    init: (options) ->
+    constructor: (options) ->
       @me = []
       @size = options.size if options.size
       @el = $(options.el) if options.el
@@ -45,7 +45,7 @@ define ['jquery', 'modules/game/state', 'modules/game/winner'], ($, State, Winne
           # Interaction
           if row_num>0 and row_num<@me.length-1
             s.click (here) =>
-              @game.clicked(here)
+              @game.clicked(here, true)
             space.on 'change:state', (new_state)->
               new_state.get('el').addClass "state#{new_state.get('state')}"
             s.data "space", space

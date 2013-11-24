@@ -7,7 +7,8 @@ require.config({
         underscore: '../bower_components/underscore/underscore',
         handlebars: '../bower_components/handlebars/handlebars',
         'handlebars.runtime': '../bower_components/handlebars/handlebars.runtime',
-        'cryptojs.sha1': '../bower_components/crypto-js/build/rollups/sha1'
+        'cryptojs.sha1': '../bower_components/crypto-js/build/rollups/sha1',
+        mustache: '../bower_components/mustache/mustache'
     }
 });
 

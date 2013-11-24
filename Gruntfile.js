@@ -28,6 +28,10 @@ module.exports = function (grunt) {
                 files: ['test/spec/{,*/}*.coffee'],
                 tasks: ['coffee:test']
             },
+            templates: {
+                files: ['<%= yeoman.app %>/scripts/{,*/}*.{mustache,tpl}'],
+                tasks: ['tpl']
+            },
             compass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['compass:server', 'autoprefixer']
@@ -43,7 +47,7 @@ module.exports = function (grunt) {
                 files: [
                     '<%= yeoman.app %>/*.html',
                     '.tmp/styles/{,*/}*.css',
-                    '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+                    '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.*',
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
             }
@@ -277,6 +281,9 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        tpl: {
+            ".tmp/scripts/t.js": ["<%= yeoman.app %>/scripts/templates/*"]
+        },
         // Put files not handled in other tasks here
         copy: {
             dist: {
@@ -358,6 +365,8 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
+            'bower',
+            'tpl',
             'concurrent:server',
             'autoprefixer',
             'connect:livereload',
@@ -376,6 +385,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'copy:bodge',
+        'tpl',
         'useminPrepare',
         'concurrent:dist',
         'autoprefixer',

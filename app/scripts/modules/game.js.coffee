@@ -12,23 +12,39 @@ define ['modules/game/map', 'jquery', 'underscore', 'backbone', 'marionette'], (
     # Turn number
     @turn = -1
 
+    @me = -> @turn%@players+1
+
     Game.newGame = (options) =>
-      @m = new MyMap()
-      @m.init {size: options.size, el: options.game_el, game: @}
+      @m = new MyMap size: options.size, el: options.game_el, game: @
       @m.render()
       @el = $(options.game_el) if options && options.game_el
+      if options.other_player && App.game_channel
+        @him = options.other_player
+        App.game_channel.bind 'play', (data) =>
+          @receive(data)
       @render()
 
     Game.clicked = (here) =>
       space = $(here.target).data("space")
-      me = @turn%@players+1
-      if space && space.get('state') == 0 && me > 0
-        space.set('state', me)
-        @incrTurn()
+      if space && space.get('state') == 0 && @me() > 0
+        if @me() != @him
+          if @him
+            @publish(space)
+          else
+            @play(space)
 
-    # Is it to the next player to play?
-    Game.changeTurn = (sure) =>
-      @incrTurn() if sure
+    Game.receive = (here) =>
+      console.debug "Je reçois ça : #{here}"
+      @play(here)
+
+    Game.publish = (here) =>
+      position = "1,2"
+      App.channel.trigger('play_this', position)
+      console.debug "Je publie ça : #{position}"
+
+    Game.play = (space) =>
+        space.set('state', @me())
+        @incrTurn()
 
     Game.incrTurn = () =>
       @turn++;
