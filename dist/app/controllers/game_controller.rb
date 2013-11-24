@@ -2,11 +2,14 @@ class GameController < WebsocketRails::BaseController
 
   def client_connected
     new_player = Player.where(token: params[:uuid]).first_or_create
-    p "Hello M. #{new_player.token}"
   end
 
   def client_disconnected
     old_player = Player.where(token: params[:uuid]).destroy_all
-    p "Goodbye M. #{old_player.first.token}"
+  end
+
+  def broadcast_players_online
+    number_players_online = Player.all.count
+    broadcast_message :number_online, number_players_online, namespace: 'info'
   end
 end

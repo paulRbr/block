@@ -11,11 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131116201757) do
+ActiveRecord::Schema.define(:version => 20131117153736) do
+
+  create_table "games", :force => true do |t|
+    t.integer  "level"
+    t.integer  "winner_id"
+    t.integer  "player1_id"
+    t.integer  "player2_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "games", ["player1_id"], :name => "index_games_on_player1_id"
+  add_index "games", ["player2_id"], :name => "index_games_on_player2_id"
+  add_index "games", ["winner_id"], :name => "index_games_on_winner_id"
 
   create_table "players", :force => true do |t|
     t.string   "name"
-    t.boolean  "playing"
     t.integer  "level"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
