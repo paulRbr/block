@@ -15,6 +15,24 @@
   }
 }
 
+.social-links {
+  li {
+    width: 33.33%;
+  }
+}
+
+.stats-data {
+  li.active, li:hover {
+    a {
+      border-top: 4px solid #E55E3A;
+      background: white;
+      span {
+        color: #E55E3A;
+      }
+    }
+  }
+}
+
 .modalDialog {
   position: fixed;
   font-family: Arial, Helvetica, sans-serif;
@@ -37,7 +55,7 @@
 }
 
 .modalDialog > div {
-  width: 400px;
+  width: 475px;
   position: relative;
   margin: 10% auto;
   padding: 5px 20px 13px 20px;

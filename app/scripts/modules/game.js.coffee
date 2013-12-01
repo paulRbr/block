@@ -14,6 +14,9 @@ define ['modules/game/map', 'jquery', 'underscore', 'backbone', 'marionette'], (
 
     @me = -> @turn%@players+1
 
+    Game.on 'stop', =>
+      @el.empty()
+
     Game.newGame = (options) =>
       @m = new MyMap size: options.size, el: options.game_el, game: @
       @m.render()
@@ -39,7 +42,7 @@ define ['modules/game/map', 'jquery', 'underscore', 'backbone', 'marionette'], (
 
     Game.publish = (here) =>
       position = "1,2"
-      App.channel.trigger('play_this', position)
+      App.game_channel.trigger('play', position)
       console.debug "Je publie ça : #{position}"
 
     Game.play = (space) =>

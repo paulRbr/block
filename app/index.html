@@ -29,12 +29,14 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="widget-container boxed">
-                          <h1 class="widget-title">Time to Block!</h1>
-                          <div class="inner comment-text">
-                              <div id="welcome"></div>
-                              <div id="game"></div>
-                          </div>
-                          <ul class="stats-links clearfix">
+                        <h1 class="widget-title">Time to Block!</h1>
+                        <ul id="main_menu" class="stats-data clearfix"></ul>
+                        <div class="inner clearfix">
+                            <img src="/images/loading.gif" id="loading-indicator" style="display:none" />
+                            <div id="game"></div>
+                        </div>
+                        <div class="post-meta-links social-links">
+                          <ul class="clearfix">
                               <li class="first">
                                   <a class="social-github" href="https://github.com/popox/block" data-bypass target="_blank" hidefocus="true" style="outline: medium none;"><span>GitHub</span></a>
                               </li>
@@ -46,6 +48,7 @@
                               </li>
                           </ul>
                         </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,11 +57,7 @@
         <!-- ModalDialog thanks to : http://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/ -->
         <div id="openModal" class="modalDialog">
             <div class="container">
-                <div class="widget-container styled boxed line-left">
-                    <div class="inner clearfix">
-                        <div id="modalContainer"></div>
-                    </div>
-                </div>
+                <div class="widget-container styled boxed line-left" id="modalContainer"></div>
             </div>
         </div>
 
