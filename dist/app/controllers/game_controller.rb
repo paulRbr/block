@@ -1,11 +1,11 @@
 class GameController < WebsocketRails::BaseController
 
   def client_connected
-    new_player = Player.where(token: params[:uuid]).first_or_create
+    Player.where(token: params[:uuid]).first_or_create
   end
 
   def client_disconnected
-    old_player = Player.where(token: params[:uuid]).destroy_all
+    Player.where(token: params[:uuid]).destroy_all
   end
 
   def broadcast_players_online

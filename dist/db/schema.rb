@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(:version => 20131117153736) do
 
   create_table "games", :force => true do |t|
     t.integer  "level"
+    t.string   "token"
     t.integer  "winner_id"
     t.integer  "player1_id"
     t.integer  "player2_id"

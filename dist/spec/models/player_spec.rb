@@ -12,7 +12,7 @@ describe Player do
   context "when never played" do
     it "is not playing" do
       player = FactoryGirl.create :player
-      should_not be player.playing?
+      should_not be player.is_playing?
     end
   end
 

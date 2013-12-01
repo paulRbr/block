@@ -2,6 +2,7 @@ class CreateGames < ActiveRecord::Migration
   def change
     create_table :games do |t|
       t.integer :level
+      t.string :token
       t.references :winner
       t.references :player1
       t.references :player2

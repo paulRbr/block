@@ -2,13 +2,16 @@ RailsApp::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  # Game handshake
-  match 'send/' => 'game#send_msg'
+  # API actions
+  match '/:action(/:id).json' => 'info'
 
-  # WebSocket connection parameters
-  match 'ws/' => 'info#connection_params'
-
+  match '/ws' => 'info#connection_params'
   match '/websocket', :to => WebsocketRails::ConnectionManager.new
+
+  # Any actions controlled by the frontend
+  match '/:foo' => 'empty#index'
+  match '/:foo(/:bar)' => redirect { |params, request| "/#{params[:foo]}?#{params[:bar]}" }
+  root :to => 'empty#index'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
