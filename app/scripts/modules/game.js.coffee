@@ -4,31 +4,33 @@ define ['modules/game/map', 'jquery', 'underscore', 'backbone', 'marionette'], (
     Game.startWithParent = false
 
     Game.addInitializer (options) =>
+      @initialize(options)
       @newGame(options)
 
-    # CST Number of players
-    @players = 2
-
-    # Turn number
-    @turn = -1
-
-    @me = -> @turn%@players+1
-
-    Game.on 'stop', =>
-      @el.empty()
+    Game.initialize = (options) =>
+      # {Number} CST Number of players
+      @players = 2
+      # {Number} Turn number
+      @turn = -1
+      # {Number} Player to play
+      @me = -> @turn%@players+1
+      # {Number} Other player's number if playing online
+      @him = null
+      @el = $(options.game_el) if options.game_el
+      if options.other_player && options.game_channel
+        @him = options.other_player
+        @game_channel = options.game_channel
 
     Game.newGame = (options) =>
       @m = new MyMap size: options.size, el: options.game_el, game: @
       @m.render()
-      @el = $(options.game_el) if options && options.game_el
-      if options.other_player && App.game_channel
-        @him = options.other_player
-        App.game_channel.bind 'play', (data) =>
-          @receive(data)
       @render()
+      if @game_channel
+        @game_channel.bind 'play', (data) =>
+          @receive(data)
 
-    Game.clicked = (here) =>
-      space = $(here.target).data("space")
+    Game.clicked = (there) =>
+      space = $(there.target).data("space")
       if space && space.get('state') == 0 && @me() > 0
         if @me() != @him
           if @him
@@ -37,13 +39,12 @@ define ['modules/game/map', 'jquery', 'underscore', 'backbone', 'marionette'], (
             @play(space)
 
     Game.receive = (here) =>
-      console.debug "Je reçois ça : #{here}"
-      @play(here)
+      space = @m.states.findWhere(here)
+      @play(space)
 
     Game.publish = (here) =>
-      position = "1,2"
-      App.game_channel.trigger('play', position)
-      console.debug "Je publie ça : #{position}"
+      position = {x: here.get('x'), y: here.get('y')}
+      @game_channel.trigger 'play', position
 
     Game.play = (space) =>
         space.set('state', @me())

@@ -17,7 +17,7 @@ define [
 
   App.addInitializer ->
     App.addRegions {
-      mainMenuRegion: "#main_menu"
+      mainMenuRegion: "#main-menu"
       gameRegion: "#game"
       popupRegion: "#modalContainer"
     }
@@ -71,8 +71,12 @@ define [
         evt.preventDefault()
         Backbone.history.navigate(href, true)
 
-  App.startGame = ->
+  App.stopGame = (options)->
     App.GameModule.stop()
-    App.GameModule.start({size: 5, game_el: '#game', other_player: App.online})
+
+  App.startGame = (options)->
+    App.GameModule.stop()
+    other = options.other_player if options && options.other_player
+    App.GameModule.start({size: 5, game_el: '#game', other_player: other, game_channel: App.game_channel})
 
   return App

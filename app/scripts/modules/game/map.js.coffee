@@ -6,6 +6,7 @@ define ['jquery', 'modules/game/state', 'modules/game/winner'], ($, State, Winne
       @size = options.size if options.size
       @el = $(options.el) if options.el
       @game = options.game if options.game
+      @states = new Backbone.Collection [], {model: State}
       @map = $("<div id='map'></div>").appendTo @el
       @winner = new Winner {game: @me}
       @build(2*@size+1) if @size
@@ -21,12 +22,12 @@ define ['jquery', 'modules/game/state', 'modules/game/winner'], ($, State, Winne
         else
           lim = @size-1
         while lim>0
-          a.push(new State())
+          a.push(@states.add(new State {x:n, y:lim}))
           lim--
         @me.push(a)
         @build(n-1) if n > 1
       else
-        console.warn("You're trying to build a #{n} size map.. Are you sure?")
+        throw new Error("You're trying to build a #{n} size map.. Are you sure?")
 
     render: () ->
       row_num = 0

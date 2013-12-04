@@ -9,6 +9,26 @@ require.config({
         'handlebars.runtime': '../bower_components/handlebars/handlebars.runtime',
         'cryptojs.sha1': '../bower_components/crypto-js/build/rollups/sha1',
         mustache: '../bower_components/mustache/mustache'
+    },
+    shim: {
+        underscore: {
+            exports: '_'
+        },
+        backbone: {
+            deps: [
+                'underscore',
+                'jquery'
+            ],
+            exports: 'Backbone'
+        },
+        marionette: {
+            deps: [
+                'underscore',
+                'jquery',
+                'backbone'
+            ],
+            exports: 'Marionette'
+        }
     }
 });
 
