@@ -26,15 +26,20 @@ class InfoController < ApplicationController
   # HTTP param uuid of the player joining the game
   def join_game
     if params[:id]
-      g = Game.find_by_token(params[:id].html_safe)
+      g = Game.find_by_token(params[:id])
     else
       g = Game.any_available
     end
-    if params[:uuid] && !g.nil?
-      p = Player.where(token: params[:uuid].html_safe).first_or_create
-      g.player2 = p
+    if params[:uuid] && !g.nil? && (g.player1.nil? || g.player2.nil?)
+      p = Player.where(token: params[:uuid]).first_or_create
+      g.player2 = p if g.player2.nil? && g.player1 != p
+      g.player1 = p if g.player1.nil? && g.player2 != p
 
-      render_game g
+      if p.playing.first == g
+        render_game g
+      else
+        render json: {error: 'Impossible to join any game, are you already playing?'}, status: 404
+      end
     else
       render json: {error: 'Please provide a game token and a player uuid to join a game'}, status: 404
     end
@@ -45,7 +50,7 @@ class InfoController < ApplicationController
   # @return {.json} Object containing the game_token or an error message if no game
   def render_game(g)
     if !g.nil? && g.save
-      render json: {game_token: g.token}
+      render json: g.to_json(include: {player1: {only: :token}}, only: :token)
     else
       render json: {error: "Can not create game #{g}.. Try again later"}, status: 404
     end

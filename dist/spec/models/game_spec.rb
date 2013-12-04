@@ -27,4 +27,19 @@ describe Game do
     game.winner.should_not eq game.player2
   end
 
+  context "when a player leaves an ongoing game" do
+    before(:each) do
+      @game = FactoryGirl.create :ongoing_game
+      player = @game.player1
+      player.destroy
+    end
+
+    it "sets the winner" do
+      @game.winner.should be @game.player2
+    end
+
+    it "triggers a finished event on the game channel" do
+       # TODO
+    end
+  end
 end

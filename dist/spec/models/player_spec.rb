@@ -4,7 +4,7 @@ describe Player do
 
   context "when already played" do
     it "has a list of played games" do
-      game = FactoryGirl.create :finished_game
+      game = FactoryGirl.create :ongoing_game
       game.player1.played.should include game
     end
   end

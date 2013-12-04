@@ -6,16 +6,27 @@ class Player < ActiveRecord::Base
 
   validates_uniqueness_of :token
 
+  before_destroy :loose_playing_game
+
   def played
-    played_first + played_second
+    self.played_first + played_second
   end
 
   def playing
-    played.select{ |game| game.winner.nil? }
+    self.played.select{ |game| game.winner.nil? }
   end
 
   def is_playing?
-    !playing.empty?
+    !self.playing.empty?
   end
 
+  private
+
+  def loose_playing_game
+    if self.is_playing?
+      winner = self.playing.first.player1.id == self.id ? self.playing.first.player2 : self.playing.first.player1
+      playing.first.winner = winner
+    end
+    true
+  end
 end
