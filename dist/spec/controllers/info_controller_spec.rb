@@ -4,6 +4,8 @@ describe InfoController do
 
   let(:valid_session) { {} }
 
+  describe "GET "
+
   describe "GET connection parameters" do
     it "gives a HOST and PORT to use for websocket connection" do
       get :connection_params, {}, valid_session

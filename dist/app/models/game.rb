@@ -17,15 +17,13 @@ class Game < ActiveRecord::Base
   end
 
   def player1=(value)
-    if self.player1.nil? && !value.is_playing?
-      value.played_first << self
+    set_player 1, value do
       super value
     end
   end
 
   def player2=(value)
-    if self.player2.nil? && !value.is_playing?
-      value.played_second << self
+    set_player 2, value do
       super value
     end
   end
@@ -48,5 +46,25 @@ class Game < ActiveRecord::Base
 
   def generate_token
     self.token = SecureRandom.hex(12)
+  end
+
+  def set_player p, value
+    if p == 2
+      one = self.player2
+      two = self.player1
+      played = value.played_second
+    elsif p == 1
+      one = self.player1
+      two = self.player2
+      played = value.played_first
+    else
+      raise Exception("There are only two players in this game, you can't set_player #{p}")
+    end
+
+    if one.nil? && !value.is_playing?
+      played << self
+      yield
+      WebsocketRails[self.token.to_sym].trigger(:ready, value) unless two.nil?
+    end
   end
 end

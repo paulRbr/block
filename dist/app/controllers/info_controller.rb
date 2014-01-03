@@ -13,10 +13,10 @@ class InfoController < ApplicationController
   def random_game
     if params[:uuid]
       p = Player.where(token: params[:uuid].html_safe).first_or_create
-      g = p.playing.first if p.is_playing?
+      @g = p.playing.first if p.is_playing?
     end
-    g = Game.create if g.nil?
-    g.player1 = p unless p.nil?
+    @g = Game.create if @g.nil?
+    @g.player1 = p unless p.nil?
 
     render_game g
   end
@@ -25,18 +25,15 @@ class InfoController < ApplicationController
   # Retrieves the game if the given player is able to join
   # HTTP param uuid of the player joining the game
   def join_game
-    if params[:id]
-      g = Game.find_by_token(params[:id])
-    else
-      g = Game.any_available
-    end
-    if params[:uuid] && !g.nil? && (g.player1.nil? || g.player2.nil?)
-      p = Player.where(token: params[:uuid]).first_or_create
-      g.player2 = p if g.player2.nil? && g.player1 != p
-      g.player1 = p if g.player1.nil? && g.player2 != p
+    params[:id] ? @g = Game.find_by_token(params[:id]) : @g = Game.any_available
 
-      if p.playing.first == g
-        render_game g
+    if params[:uuid] && !@g.nil? && (@g.player1.nil? || @g.player2.nil?)
+      p = Player.where(token: params[:uuid]).first_or_create
+      @g.player2 = p if @g.player2.nil? && @g.player1 != p
+      @g.player1 = p if @g.player1.nil? && @g.player2 != p
+
+      if p.playing.first == @g
+        render_game @g
       else
         render json: {error: 'Impossible to join any game, are you already playing?'}, status: 404
       end
