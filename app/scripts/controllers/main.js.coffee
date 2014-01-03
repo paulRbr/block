@@ -2,10 +2,13 @@ define ['jquery'], ($) ->
   class MainController
 
     reload: ->
-      console.debug("Restarting")
-      App.startGame()
+      App.stopGame()
+      $('#waiting-indicator').hide()
+      @_setActiveTab('home')
+      App.gameRegion.show(new Backbone.Marionette.ItemView(template: templates._welcome))
 
     playWithAnyone: (options) ->
+      App.stopGame()
       $('#loading-indicator').show()
       console.debug("Go online with anyone!")
       $.get('join_game.json', uuid: App.uuid, (response) ->
@@ -13,15 +16,17 @@ define ['jquery'], ($) ->
         App.game_channel = App.dispatcher.subscribe response.token
         if (response.player1 && response.player1.token == App.uuid)
           other = 2
+          $('#waiting-indicator').hide()
+          App.startGame {other_player: other}
         else
           other = 1
-        App.game_channel.bind 'ready', ->
-          App.startGame {other_player: other}
+          $('#waiting-indicator .info').html('You will play as Player 1.. Please wait for player 2')
+          App.game_channel.bind 'ready', ->
+            App.startGame {other_player: other}
+            $('#waiting-indicator').hide()
         App.game_channel.bind 'finished', (data) ->
           App.stopGame()
-
-        if response.player1
-          App.game_channel.trigger 'ready'
+        $('#waiting-indicator').show()
       ).fail( (e)->
         console.debug "Impossible to join a game. Server answered: #{e.responseText.error}"
       ).always( ->

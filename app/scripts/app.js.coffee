@@ -23,6 +23,7 @@ define [
     }
     App.mainMenuRegion.show(new Backbone.Marionette.ItemView(template: templates._main_menu))
     App.popupRegion.show(new Backbone.Marionette.ItemView(template: templates._online))
+    App.gameRegion.show(new Backbone.Marionette.ItemView(template: templates._welcome))
 
     # Connect to a channel
     # channel = dispatcher.subscribe 'channel_name'
@@ -37,7 +38,7 @@ define [
     App.router = new Backbone.Marionette.AppRouter(
       controller: mainController
       appRoutes:
-        "restart": "reload"
+        "home": "reload"
         "online": "playWithAnyone"
         "join/:id": "playWithFriend"
         "offline": "goOffline"
@@ -71,11 +72,12 @@ define [
         evt.preventDefault()
         Backbone.history.navigate(href, true)
 
-  App.stopGame = (options)->
+  App.stopGame = ()->
     App.GameModule.stop()
+    $('#game').empty()
 
   App.startGame = (options)->
-    App.GameModule.stop()
+    App.stopGame()
     other = options.other_player if options && options.other_player
     App.GameModule.start({size: 5, game_el: '#game', other_player: other, game_channel: App.game_channel})
 
