@@ -16,7 +16,7 @@ module RailsApp
     # -- all .rb files in that directory are automatically loaded.
 
     # Configure Rails Asynchronous Request Processing
-    #config.middleware.use Rack::FiberPool
+    #config.middleware.use Rack::Static, :urls => {'/' => 'index.html'}, :root => 'public'
     config.threadsafe!
 
     # Custom directories with classes and modules you want to be autoloadable.

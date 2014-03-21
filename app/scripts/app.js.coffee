@@ -10,11 +10,22 @@ define [
     @.$el.hide()
     @.$el.html view.$el.children()
     @.$el.fadeToggle "fast"
-  # Create the single page application
+  # Create the App
   App = window.App || new Backbone.Marionette.Application()
   # Export the app globally
   window.App = App
 
+  # Helpers to stop/start a game
+  App.stopGame = ()->
+    App.GameModule.stop()
+    $('#game').empty()
+
+  App.startGame = (options)->
+    App.stopGame()
+    other = options.other_player if options && options.other_player
+    App.GameModule.start({size: 5, game_el: '#game', other_player: other, game_channel: App.game_channel})
+
+  # Eendering regions initializer
   App.addInitializer ->
     App.addRegions {
       mainMenuRegion: "#main-menu"
@@ -25,30 +36,7 @@ define [
     App.popupRegion.show(new Backbone.Marionette.ItemView(template: templates._online))
     App.gameRegion.show(new Backbone.Marionette.ItemView(template: templates._welcome))
 
-    # Connect to a channel
-    # channel = dispatcher.subscribe 'channel_name'
-
-  # Add Game module to the app
-  App.addInitializer ->
-    App.module "GameModule", GameModule
-
-  # Create main router and start history
-  App.addInitializer (options) ->
-    mainController = new MainController options
-    App.router = new Backbone.Marionette.AppRouter(
-      controller: mainController
-      appRoutes:
-        "home": "reload"
-        "online": "playWithAnyone"
-        "join/:id": "playWithFriend"
-        "offline": "goOffline"
-    )
-    $("#new_game").click ->
-      App.router.navigate 'join', trigger: true
-    $("#random_game").click ->
-      App.router.navigate 'online', trigger: true
-    Backbone.history.start({pushState: true}) if Backbone.history
-
+  # Initialize WebSocket - HandShaker with the server
   App.addInitializer ->
     # Get websocket connection info
     App.uuid = CryptoJS.SHA1(navigator.userAgent + new Date().getTime()).toString()
@@ -63,7 +51,7 @@ define [
 
     )
 
-# Prevent default clicks on links for a pushState ready app
+  # Prevent default clicks on links for a pushState ready app
   App.addInitializer () ->
     $(document).on 'click', 'a:not([data-bypass])', (evt) ->
       href = $(@).attr('href')
@@ -72,13 +60,26 @@ define [
         evt.preventDefault()
         Backbone.history.navigate(href, true)
 
-  App.stopGame = ()->
-    App.GameModule.stop()
-    $('#game').empty()
+  # Add Game module to the app
+  App.addInitializer ->
+    App.module "GameModule", GameModule
 
-  App.startGame = (options)->
-    App.stopGame()
-    other = options.other_player if options && options.other_player
-    App.GameModule.start({size: 5, game_el: '#game', other_player: other, game_channel: App.game_channel})
+  # Create main router and start history
+  App.addInitializer (options) ->
+    mainController = new MainController options
+    App.router = new Backbone.Marionette.AppRouter(
+      controller: mainController
+      appRoutes:
+        "home": "reload"
+        "online": "playWithAnyone"
+        "create_game": "playWithFriend"
+        "join_game*queryparams": "playWithFriend"
+        "offline": "goOffline"
+    )
+    $("#new_game").click ->
+      App.router.navigate 'create_game', trigger: true
+    $("#random_game").click ->
+      App.router.navigate 'online', trigger: true
+    Backbone.history.start({pushState: true}) if Backbone.history
 
   return App

@@ -10,7 +10,7 @@ RailsApp::Application.routes.draw do
 
   # Any actions controlled by the frontend
   match '/:foo' => 'empty#index'
-  match '/:foo(/:bar)' => redirect { |params, request| "/#{params[:foo]}?#{params[:bar]}" }
+  match '/:foo(/:bar)' => redirect { |params, req| "/#{params[:foo]}?#{params[:foo]}=#{params[:bar]}&#{req.query_parameters.to_query}" }
   root :to => 'empty#index'
 
   # Sample of regular route:
