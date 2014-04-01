@@ -42,6 +42,7 @@ define ['jquery'], ($) ->
           App.startGame(other_player: other)
         else
           other = 1
+          $('#waiting-indicator').show()
           game_url = "#{location.protocol}//#{window.location.host}/join_game/#{response.token}"
           App.gameRegion.show(new Backbone.Marionette.ItemView(
             template: templates._game_link
@@ -53,7 +54,6 @@ define ['jquery'], ($) ->
             App.startGame(other_player: other)
         App.game_channel.bind 'finished', (data) ->
           App.stopGame()
-        $('#waiting-indicator').show()
       ).fail( (e)->
         console.debug "Impossible to join a game. Server answered: #{e.responseText.error}"
       ).always( ->
